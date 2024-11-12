@@ -1,5 +1,23 @@
-<h1>Games</h1>
+<body>
+    
 
+<h1>Games</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="column" >
+        @for (game of games; track game.id){
+            <img [src]="game.thumbnail" class="img-thumbnail" alt="...">
+            
+        }
+            
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+<!---
 <div class="lista">
     @for (game of games; track game.id)
      {<div class="cartao">
@@ -12,4 +30,4 @@
             </p>
     </div>}
     
-</div>
+</div>-->
