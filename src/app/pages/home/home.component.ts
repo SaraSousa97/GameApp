@@ -1,30 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ListsService } from '../../services/lists.service';
-import { RouterLink } from '@angular/router';
+import { Game } from '../../models/game';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  @Input() meuNome='Carol';
 
-  games: Array<any> = [];
+  games: Array<Game> = [];
 
-  constructor(private listService: ListsService){}
+  constructor(private listsService:ListsService){}
 
-  ngOnInit(){
 
-    this.listService.getGamesList().subscribe({
-      next: (data) => {
+ 
+  ngOnInit() {
+    this.listsService.getGamesList().subscribe({
+      next: (data: Game[]) => {
         console.log(data);
         this.games = data;
       },
-      error: (error) =>{
-        console.log('Algo correu mal: ', error);
+      error: (error) => {
+        console.log('Something went wrong: ', error);
       }
     });
   }
+  
 }

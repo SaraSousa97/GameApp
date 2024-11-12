@@ -1,13 +1,15 @@
-<h1>Home</h1>
-
-<!--ir buscar o que esta em gamesList no json [routerLink]="'/game-details' + game.id"-->
+<h1>Games</h1>
 
 <div class="lista">
-    @for(game of games; track game.id){
-        <div class="game" >
-            <h3>{{game.title}}</h3>
-            <p>{{game.thumbnail}}</p>
-            <p>Genre: {{game.genre}}</p>
-        </div>
-    }
+    @for (game of games; track game.id)
+     {<div class="cartao">
+        <h3>{{game.title}} 
+            
+        </h3>
+        <img [src]="game.thumbnail" alt = "">
+            <p>
+                Developer: {{game.developer}}
+            </p>
+    </div>}
+    
 </div>
