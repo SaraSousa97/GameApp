@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { ListsService } from '../../services/lists.service';
 import { Game } from '../../models/game';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

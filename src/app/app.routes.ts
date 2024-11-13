@@ -10,7 +10,7 @@ export const routes: Routes = [
     {path:'user-profile',children:[
         {path:'',title:'User Profile', component:UserProfileComponent },
         {path:'update-user/:id', title: 'Edit User Information',component:UpdateUserComponent}]},
-    {path:'game-details', title: 'Game Details', component:GameDetailsComponent},
+    {path:'game-details/:id', title: 'Game Details', component:GameDetailsComponent},
     {path:'', redirectTo:'/home', pathMatch:'full'},
     {path:'**', component:NotFoundComponent}
 ];
