@@ -1,2 +1,87 @@
-<h1>Game Details</h1>
+<div class="container mt-4">
+    <div class="card mb-4">
+      <img
+        [src]="gameInfo?.thumbnail"
+        class="card-img-top"
+        alt="Thumbnail"
+      />
+      <div class="card-body">
+        <h2 class="card-title">{{ gameInfo?.title }}</h2>
+        <p class="card-text mt-3">
+          {{ gameInfo?.shortDescription }}
+        </p>
+        <p class="text-muted">
+          Release Date: <strong>{{ gameInfo?.releaseDate }}</strong>
+        </p>
+        <a
+          [href]="gameInfo?.gameURL"
+          class="btn btn-primary"
+          target="_blank"
+          >Play Now</a
+        >
+      </div>
+    </div>
+  
+    <div class="mb-4">
+      <h3>Game Description</h3>
+      <p>
+        {{ gameInfo?.shortDescription }}
+      </p>
+    </div>
+  
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h3>Details</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Genre:</strong> {{ gameInfo?.genre }}
+          </li>
+          <li class="list-group-item">
+            <strong>Platform:</strong> {{ gameInfo?.platform }}
+          </li>
+          <li class="list-group-item">
+            <strong>Publisher:</strong> {{ gameInfo?.publisher }}
+          </li>
+          <li class="list-group-item">
+            <strong>Developer:</strong> {{ gameInfo?.developer }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+<h3>Minimum System Requirements</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>OS:</strong> {{ gameInfo?.minimumSystemRequirements?.os }}
+        </li>
+        <li class="list-group-item">
+          <strong>Processor:</strong> {{ gameInfo?.minimumSystemRequirements?.processor }}
+        </li>
+        <li class="list-group-item">
+          <strong>Memory:</strong> {{ gameInfo?.minimumSystemRequirements?.memory }}
+        </li>
+        <li class="list-group-item">
+          <strong>Graphics:</strong> {{ gameInfo?.minimumSystemRequirements?.graphics }}
+        </li>
+        <li class="list-group-item">
+          <strong>Storage:</strong> {{ gameInfo?.minimumSystemRequirements?.storage }}
+        </li>
+      </ul>
+    </div>
+  </div>
+<!----
+    <div>
+      <h3>Screenshots</h3>
+      <div class="row">
+        <div class="col-md-4">
+            @for (screenshot of gameInfo?.screenshots; track screenshot.id) {}
+          <img
+            [src]="gameInfo?.screenshots"
 
+            class="img-fluid rounded mb-3"
+            alt="Screenshot"
+          />
+        </div>
+      </div>
+    </div>-->
+  </div>
+  
