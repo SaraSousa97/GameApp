@@ -1,2 +1,21 @@
 <h1>User Profile</h1>
 
+<!--mostrar e possibilidade de editar-->
+<div>    
+    <form action="form" class="form-group">
+        <h3 class="form-control">{{user?.name}}</h3>        
+        <p class="form-control">{{user?.email}}</p> 
+        <img [src]="user?.avatar" class="avatar" alt="avatar"/>
+        @for( list of user?.lists; track list.id){
+            <h4 class="form-control">{{ list.name }}</h4>
+            <!--@for(gameId of list.gamesIds; track $index){ era para pôr as imgens ou pelo menos nomes dos jogo mas ainda stou a tentar perceber como
+                mostra as imagens como links quebrados
+              <img [src]="getGameThumbnail(gameId)" alt="Game thumbnail" class="game-thumbnail" />
+            }
+            @for(gameId of list.gamesIds; track $index){
+                <p></p>
+        }-->
+        }
+        <button type="button" class="btn btn-primary">Edit Profile</button>
+    </form>
+</div>
