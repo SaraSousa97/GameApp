@@ -18,6 +18,10 @@ export class UserService {
   getGameImage(gameId: string): Observable<GameInfo> {
     return this.http.get<GameInfo>(`http://localhost:3000/games/${gameId}`);
   }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>('http://localhost:3000/profile/', user);
+  }
 }
 
 

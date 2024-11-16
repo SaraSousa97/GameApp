@@ -36,7 +36,7 @@ export class UserProfileComponent {
   }
 
   editProfile(){
-    this.router.navigate(['update-user/:id', this.user?.id]);
+    this.router.navigate(['user-profile', this.user?.id, 'update-user']);
   }
 
   getGameThumbnail(gameId: string){
