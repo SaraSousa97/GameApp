@@ -13,12 +13,8 @@
         <p class="text-muted">
           Release Date: <strong>{{ gameInfo?.releaseDate }}</strong>
         </p>
-        <a
-          [href]="gameInfo?.gameURL"
-          class="btn btn-primary"
-          target="_blank"
-          >Play Now</a
-        >
+        <a         href="{{ gameInfo?.freetogameProfileUrl }}"         class="btn btn-primary"      >         Play Now       </a>
+      
       </div>
     </div>
   
@@ -68,20 +64,16 @@
       </ul>
     </div>
   </div>
-<!----
-    <div>
-      <h3>Screenshots</h3>
-      <div class="row">
-        <div class="col-md-4">
-            @for (screenshot of gameInfo?.screenshots; track screenshot.id) {}
-          <img
-            [src]="gameInfo?.screenshots"
 
-            class="img-fluid rounded mb-3"
-            alt="Screenshot"
-          />
-        </div>
-      </div>
-    </div>-->
+    <!-- Iterate through screenshots array -->
+    <h3>Screenshots</h3>
+    <div
+      class="col-md-4"
+      *ngFor="let screenshot of gameInfo?.screenshots; trackBy: trackByScreenshotId">
+      <img
+        [src]="screenshot.image"
+        class="img-fluid rounded mb-3"
+        alt="Screenshot"
+      />
   </div>
   
