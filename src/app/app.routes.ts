@@ -7,7 +7,7 @@ import { GameDetailsComponent } from './pages/game-details/game-details.componen
 
 export const routes: Routes = [
     {path:'home', component:HomeComponent},
-    {path:'user-profile',children:[
+    {path:'user-profile/:id',children:[
         {path:'',title:'User Profile', component:UserProfileComponent },
         {path:'update-user/:id', title: 'Edit User Information',component:UpdateUserComponent}]},
     {path:'game-details/:id', title: 'Game Details', component:GameDetailsComponent},

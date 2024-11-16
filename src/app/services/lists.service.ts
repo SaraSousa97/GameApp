@@ -15,8 +15,8 @@ export class ListsService {
     return this.http.get<Game[]>('http://localhost:3000/gamesList');
   }
 
-  getGameInfo(): Observable<GameInfo[]>{
-    return this.http.get<GameInfo[]>('http://localhost:3000/gameDetails');
+  getGamesInfo(id: string):Observable<GameInfo>{
+    return this.http.get<GameInfo>('http://localhost:3000/gameDetails/' + id);
   }
   
   getScreenshots(): Observable<ListScreenshots[]>{

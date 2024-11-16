@@ -53,11 +53,12 @@
           <img
             *ngIf="user"
             [src]="user?.avatar"
+            (click)="goToProfile()"
             class="rounded-circle me-2"
             alt="User Avatar"
             style="width: 40px; height: 40px;"
           />
-          <span *ngIf="user" class="fw-bold">{{ user?.name }}</span>
+          <span *ngIf="user" (click)="goToProfile()" class="fw-bold">{{ user?.name }}</span>
         </div>
       </div>
     </div>

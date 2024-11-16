@@ -22,6 +22,10 @@ export class NavbarComponent {
     private route: ActivatedRoute, private router:Router
   ) {}
 
+  goToProfile(){
+    this.router.navigate(['user-profile/', this.user?.id]);
+  }
+
   
 
   searchQuery: string = ''; // The search query
@@ -51,7 +55,7 @@ export class NavbarComponent {
     // Use route to get parameters, like 'id'
     const id = this.route.snapshot.paramMap.get('id') || '06c2';
 
-    this.userService.getUser(id).subscribe({
+    this.userService.getUser().subscribe({
       next: (data) => {
         console.log(data);
         this.user = data;  // Set the user after getting data
