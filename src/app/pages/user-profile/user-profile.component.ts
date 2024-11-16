@@ -3,11 +3,13 @@ import { List, User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { GameInfo } from '../../models/game-info';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
@@ -19,7 +21,7 @@ export class UserProfileComponent {
 
   @Input() username = 'Username';
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService, private router:Router){}
 
   ngOnInit() {
     this.userService.getUser().subscribe({
@@ -31,6 +33,10 @@ export class UserProfileComponent {
         console.log('Something went wrong: ', error);
       }
     });
+  }
+
+  editProfile(){
+    this.router.navigate(['update-user/:id', this.user?.id]);
   }
 
   getGameThumbnail(gameId: string){
