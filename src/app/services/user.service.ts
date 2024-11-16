@@ -18,6 +18,10 @@ export class UserService {
   getLists(): Observable<List[]>{
     return this.http.get<List[]>('http://localhost:3000/profile/:lists');
   }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>('http://localhost:3000/profile/', user);
+  }
 }
 
 

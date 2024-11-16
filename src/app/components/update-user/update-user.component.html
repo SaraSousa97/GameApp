@@ -1,1 +1,85 @@
-<p>update-user works!</p>
+<div class="container">
+  <h2>Editar Perfil</h2>
+  
+  <!-- Formulário de edição -->
+  <form [formGroup]="Form" (ngSubmit)="saveProfile()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Digite seu nome"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Digite seu e-mail"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Digite sua senha"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="avatar">Profile Photo (URL):</label>
+      <input
+        type="text"
+        id="avatar"
+        formControlName="avatar"
+        class="form-control"
+        placeholder="Digite a URL da foto"
+      />
+    </div>
+
+    <!-- Display a default avatar or the user's avatar -->
+    <div class="form-group text-center">
+      <div *ngIf="Form.get('avatar')?.value; else defaultAvatar">
+        <img
+          [src]="Form.get('avatar')?.value"
+          alt="User Avatar"
+          class="rounded-circle"
+          style="width: 100px; height: 100px;"
+        />
+      </div>
+      <ng-template #defaultAvatar>
+        <div
+          class="avatar-placeholder rounded-circle"
+          style="width: 100px; height: 100px; line-height: 100px; background-color: #007bff; color: white; font-size: 24px;"
+        >
+          {{ Form.get('name')?.value?.charAt(0).toUpperCase() || '?' }}
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="form-group mt-3">
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      <button
+        type="button"
+        (click)="removeAvatar()"
+        class="btn btn-danger"
+        *ngIf="Form.get('avatar')?.value"
+      >
+        Remover Foto
+      </button>
+    </div>
+  </form>
+</div>

@@ -9,7 +9,7 @@ export const routes: Routes = [
     {path:'home', component:HomeComponent},
     {path:'user-profile/:id',children:[
         {path:'',title:'User Profile', component:UserProfileComponent },
-        {path:'update-user/:id', title: 'Edit User Information',component:UpdateUserComponent}]},
+        {path:'update-user', title: 'Edit User Information',component:UpdateUserComponent}]},
     {path:'game-details/:id', title: 'Game Details', component:GameDetailsComponent},
     {path:'', redirectTo:'/home', pathMatch:'full'},
     {path:'**', component:NotFoundComponent}
