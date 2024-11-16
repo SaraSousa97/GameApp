@@ -1,4 +1,5 @@
 export interface User {
+    getLists: any;
     id: string;
     name: string;
     email: string;

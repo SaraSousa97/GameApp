@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { List, User } from '../models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
-import { GameInfo } from '../models/game-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  getGameInfo: any;
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +15,8 @@ export class UserService {
     return this.http.get<User>('http://localhost:3000/profile');
   }
 
-  getGameImage(gameId: string): Observable<GameInfo> {
-    return this.http.get<GameInfo>(`http://localhost:3000/games/${gameId}`);
+  getLists(): Observable<List[]>{
+    return this.http.get<List[]>('http://localhost:3000/profile/:lists');
   }
 }
 

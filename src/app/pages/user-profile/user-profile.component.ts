@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { List, User } from '../../models/user';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { GameInfo } from '../../models/game-info';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ListsService } from '../../services/lists.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,37 +17,50 @@ import { FormsModule } from '@angular/forms';
 export class UserProfileComponent {
 
   user: User | undefined;
-  //game: GameInfo | undefined;
-  gameThumbnail: string | undefined;
+  gameThumbnails: { [gameId: string]: string } = {};
 
   @Input() username = 'Username';
 
-  constructor(private userService:UserService, private router:Router){}
+  constructor(private userService:UserService, private router:Router, private listService: ListsService, private route: ActivatedRoute, private gameService: GameService){}
 
   ngOnInit() {
     this.userService.getUser().subscribe({
-      next: (data: User) => {
+      next: (data) => {
         console.log(data);
         this.user = data;
+        this.loadGameThumbnails();
       },
       error: (error) => {
         console.log('Something went wrong: ', error);
       }
     });
+
+  }
+
+  // Método para obter todos os gameIds
+  getGameIds(): string[] {
+    return this.user?.lists?.flatMap(list => list.gamesIds) || [];
+  }
+
+  // Método para carregar as thumbnails para todos os gameIds
+  loadGameThumbnails() {
+    this.user?.lists.forEach(list => {
+      list.gamesIds.forEach(gameId => {
+        this.gameService.getGameById(gameId).subscribe({
+          next: (game) => {
+            this.gameThumbnails[gameId] = game.thumbnail;
+          },
+          error: (error) => console.error('Error loading', error)
+        });
+      });
+    });
+  }
+
+  getThumbnail(gameId: string): string {
+    return this.gameThumbnails[gameId];
   }
 
   editProfile(){
     this.router.navigate(['update-user/:id', this.user?.id]);
-  }
-
-  getGameThumbnail(gameId: string){
-    this.userService.getGameImage(gameId).subscribe({
-      next: (game: GameInfo) => {
-        this.gameThumbnail = game.thumbnail;
-      },
-      error: (error) => {
-        console.log('Error fetching game thumbnail:', error);
-      },
-    });
   }
 }

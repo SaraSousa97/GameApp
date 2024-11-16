@@ -6,17 +6,25 @@
         <h3 class="form-control">{{user?.name}}</h3>        
         <p class="form-control">{{user?.email}}</p> 
         <img [src]="user?.avatar" class="avatar" alt="avatar"/>
-        @for( list of user?.lists; track list.id){
-            <h4 class="form-control">{{ list.name }}</h4>
-            <!--@for(gameId of list.gamesIds; track $index){ era para pôr as imgens ou pelo menos nomes dos jogo mas ainda stou a tentar perceber como
-                mostra as imagens como links quebrados
-              <img [src]="getGameThumbnail(gameId)" alt="Game thumbnail" class="game-thumbnail" />
-            }
-            @for(gameId of list.gamesIds; track $index){
-                <p></p>
-        }-->
-        }
+        
+
+        <!-- Mostrar listas do usuário e os gamesIds com thumbnails -->
+        <div *ngIf="(user?.lists ?? []).length > 0" class="lists-section">
+            <h2>User Lists</h2>
+            <div *ngFor="let list of user?.lists" class="list-item">
+            <h4>{{ list.name }}</h4>
+            <ul>
+                <li *ngFor="let gameId of list.gamesIds">
+                <img [src]="getThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail" />
+                Game ID: {{ gameId }}
+                </li>
+            </ul>
+            </div>
+        </div>
+
         <button type="button"  (click)="editProfile()" class="btn btn-primary" >Edit Profile</button>
     </form>
 </div>
+
+
 
