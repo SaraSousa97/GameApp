@@ -1,20 +1,19 @@
+.autocomplete-container {
+  max-width: 400px;
+}
+
 .autocomplete-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    width: 100%;
-    z-index: 10;
-  }
-  
-  .autocomplete-list li {
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  .autocomplete-list li:hover {
-    background-color: #f0f0f0;
-  }
-  
+  z-index: 1050; /* Ensures it appears above other elements */
+  max-height: 300px; /* Limits height for scrollability */
+  overflow-y: auto; /* Enables scrolling for long lists */
+  border-radius: 5px;
+}
+
+.autocomplete-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.autocomplete-item:hover {
+  background-color: #f8f9fa; /* Light gray on hover */
+}
