@@ -11,11 +11,19 @@ export interface GameInfo {
     developer: string;
     releaseDate: string;
     freetogameProfileUrl: string;
-    minimumSystemRequirements: string;
+    minimumSystemRequirements: minimumSystemRequirements;
     screenshots: ListScreenshots[];
 }
 
 export interface ListScreenshots{
     id: string;
     image: string;
+}
+
+export interface minimumSystemRequirements{
+    graphics: string;
+    memory: string;
+    os: string;
+    processor: string;
+    storage: string;
 }

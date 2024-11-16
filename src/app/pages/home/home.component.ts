@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ListsService } from '../../services/lists.service';
 import { Game } from '../../models/game';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,20 @@ export class HomeComponent {
         console.log('Something went wrong: ', error);
       }
     });
+
+
+  }
+
+  searchQuery: string = '';
+
+  get filteredGames(): Game[] {
+    return this.games.filter(game => 
+      game.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  trackById(index: number, game: Game): string {
+    return game.id;
   }
   
 }

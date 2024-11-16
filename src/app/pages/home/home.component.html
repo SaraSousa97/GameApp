@@ -1,6 +1,17 @@
 <h1>Games</h1>
-
+<!--Tutorial on search https://medium.com/@uditgogoi1/search-bar-with-autocomplete-using-angular-5-and-angular-material-c5a77a429da7 -->
 <div class="container mt-4">
+    
+    <!--<div class="mb-4">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search games..." 
+          [(ngModel)]="searchQuery" 
+        />
+      </div>--->
+
+
     <div class="row">
         <div class="column">
         @for (game of games; track game.id){
@@ -10,7 +21,7 @@
             
         </div>
     </div>
-</div>
+
 
 
 
