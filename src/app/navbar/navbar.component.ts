@@ -51,7 +51,7 @@ export class NavbarComponent {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') || '06c2';
 
-    this.userService.getUser(id).subscribe({
+    this.userService.getUser().subscribe({
       next: (data) => {
         console.log(data);
         this.user = data;

@@ -53,6 +53,7 @@
           <img
             *ngIf="user"
             [src]="user?.avatar"
+            (click)="goToProfile()"
             class="rounded-circle me-2"
             alt="User Avatar"
             (click)="goToProfile()"
