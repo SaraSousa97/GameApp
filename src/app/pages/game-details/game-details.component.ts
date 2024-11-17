@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { forkJoin, map } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-game-details',
@@ -31,7 +32,8 @@ export class GameDetailsComponent {
     private route: ActivatedRoute,
     private listsService: ListsService,
     private router: Router,
-    private userServices: UserService
+    private userServices: UserService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -78,6 +80,10 @@ export class GameDetailsComponent {
         next: () => {
           // After moving the game, refresh the lists and update the status
           this.checkGameInLists(gameId);
+          this.snackBar.open('Game moved successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['snack-bar-success']
+          });
         },
         error: (error) => console.error('Error moving game:', error)
       });
@@ -87,6 +93,10 @@ export class GameDetailsComponent {
         next: () => {
           // After adding the game, refresh the lists and update the status
           this.checkGameInLists(gameId);
+          this.snackBar.open('Game added successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['snack-bar-success']
+          });
         },
         error: (error) => console.error('Error adding game:', error)
       });
