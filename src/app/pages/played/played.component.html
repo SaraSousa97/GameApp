@@ -1,13 +1,22 @@
 <div *ngIf="list" class="container mt-5">
-  <h2>{{ list.name }}</h2>
-  <ul class="list-group mt-3">
-    <li *ngFor="let gameId of list.gamesIds" class="list-group-item d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <img [src]="getGameThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail me-3" />
-        {{ getGameName(gameId) }}
+  <h2 class="text-center mb-4">{{ list.name }}</h2>
+  
+  <ul class="list-group">
+    <li *ngFor="let gameId of list.gamesIds" class="list-group-item mb-3 shadow-sm rounded">
+      <div class="d-flex justify-content-between align-items-center">
+        
+        <a [routerLink]="'/game-details/' + gameId">
+            <div class="d-flex align-items-center">
+              <img [src]="getGameThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail me-3" />
+              <div>
+                <h4>{{ getGameName(gameId) }}</h4>
+              </div>
+            </div>
+        </a>
+        <div class="ms-auto">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeGame(list.id, gameId)">Remove</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-danger btn-sm">Remove</button>
     </li>
   </ul>
 </div>
-  
