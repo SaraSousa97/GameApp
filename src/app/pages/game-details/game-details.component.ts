@@ -82,7 +82,9 @@ export class GameDetailsComponent {
           this.checkGameInLists(gameId);
           this.snackBar.open('Game moved successfully!', 'Close', {
             duration: 3000,
-            panelClass: ['snack-bar-success']
+            panelClass: ['snack-bar-success'],
+            horizontalPosition: 'start',  // Options: 'start', 'center', 'end'
+            verticalPosition: 'top'     // Options: 'top', 'bottom'
           });
         },
         error: (error) => console.error('Error moving game:', error)
@@ -92,11 +94,14 @@ export class GameDetailsComponent {
       this.userServices.addGameToList(targetListId, gameId).subscribe({
         next: () => {
           // After adding the game, refresh the lists and update the status
-          this.checkGameInLists(gameId);
           this.snackBar.open('Game added successfully!', 'Close', {
             duration: 3000,
-            panelClass: ['snack-bar-success']
+            panelClass: ['snack-bar-success'],
+            horizontalPosition: 'start',  // Options: 'start', 'center', 'end'
+            verticalPosition: 'top'     // Options: 'top', 'bottom'
           });
+          this.checkGameInLists(gameId);
+         
         },
         error: (error) => console.error('Error adding game:', error)
       });
