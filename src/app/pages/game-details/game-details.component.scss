@@ -1,0 +1,135 @@
+/* Container */
+.container {
+    margin-top: 30px;
+    padding: 0 15px; /* Add padding for responsiveness */
+  }
+  
+  /* Card styling */
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+.card-img-top {
+    width: 100%;
+    height: 250px; /* Fixed height for the image */
+    object-fit: cover; /* The image will cover the container area */
+    border-radius: 8px 8px 0 0; /* Optional: to round the top corners */
+    overflow: hidden; /* Ensure nothing overflows if it's cropped */
+  }
+  
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .card-text {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .card-body .btn {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .lists {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .lists button {
+    width: 150px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Game Description Section */
+  .mb-4 h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .mb-4 p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Details and System Requirements Section */
+  .row.mb-4 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .col-md-6 {
+    flex: 1;
+  }
+  
+  .list-group-item {
+    font-size: 1rem;
+    color: #555;
+    border: none;
+  }
+  
+  .list-group-item strong {
+    color: #333;
+  }
+  
+  /* Minimum System Requirements */
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  /* Screenshots Section */
+  h3.screenshots-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .col-md-4 {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .col-md-4 img {
+    border-radius: 8px;
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 767px) {
+    .row.mb-4 {
+      flex-direction: column;
+    }
+  
+    .lists button {
+      width: 100%;
+    }
+  
+    .col-md-4 {
+      width: 100%;
+    }
+  }
+  
