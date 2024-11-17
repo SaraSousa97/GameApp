@@ -1,6 +1,6 @@
-# GameApp
+# GameHorizon
 
-**GameApp** is a web application designed to help users choose and manage free games. The app allows users to manage their game library, including adding games to personal lists, removing games, and tracking progress across different categories such as "Play Later," "Currently Playing," "Played," and "Completed." 
+**GameHorizon** is a web application designed to help users choose and manage free games. The app allows users to manage their game library, including adding games to personal lists, removing games, and tracking progress across different categories such as "Play Later," "Currently Playing," "Played," and "Completed." 
 
 ## Features:
 - **User Profile**: 
