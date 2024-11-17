@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ListsService } from '../../services/lists.service';
 import { GameService } from '../../services/game.service';
+import { GameInfo } from '../../models/game-info';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,18 +19,21 @@ import { GameService } from '../../services/game.service';
 export class UserProfileComponent {
 
   user: User | undefined;
+  game: GameInfo[] = [];
+  gameIds: string[] = [];
   gameThumbnails: { [gameId: string]: string } = {};
 
   @Input() username = 'Username';
 
-  constructor(private userService:UserService, private router:Router, private listService: ListsService, private route: ActivatedRoute, private gameService: GameService){}
+  constructor(private userService:UserService, private router:Router, private listService: ListsService, private route: ActivatedRoute, private gameService: GameService, private http: HttpClient){}
 
   ngOnInit() {
     this.userService.getUser().subscribe({
       next: (data) => {
         console.log(data);
         this.user = data;
-        this.loadGameThumbnails();
+        //this.loadGameThumbnails();
+        //this.takeGameIds();
       },
       error: (error) => {
         console.log('Something went wrong: ', error);
@@ -41,7 +46,7 @@ export class UserProfileComponent {
   getGameIds(): string[] {
     return this.user?.lists?.flatMap(list => list.gamesIds) || [];
   }
-
+/*
   // Método para carregar as thumbnails para todos os gameIds
   loadGameThumbnails() {
     this.user?.lists.forEach(list => {
@@ -59,6 +64,44 @@ export class UserProfileComponent {
   getThumbnail(gameId: string): string {
     return this.gameThumbnails[gameId];
   }
+
+  takeGameIds(){
+    if (this.user?.lists) {
+      this.gameIds = this.user.lists.flatMap((list: List) => list.gamesIds);
+      console.log('Games IDs:', this.gameIds);
+    }
+  }
+*/
+
+  loadUserProfile() {
+    this.userService.getUser().subscribe(profile => {
+      this.user = profile;
+    });
+  }
+
+  addGame(listId: string, gameId: string) {
+    this.userService.moveGame(listId, gameId).subscribe({
+      next: () => this.loadUserProfile(),
+      error: (error) => console.error('Erro ao adicionar jogo:', error)
+    });
+  }
+
+
+  removeGame(listId: string, gameId: string){
+    //remover o jogo da lista
+    this.userService.deleteGame(listId, gameId).subscribe({
+      next: () => this.loadUserProfile(),
+      error: (error) => console.error('Erro ao remover jogo:', error)
+    });
+  }
+
+/*  //remove o id do jogo apenas enquanto não dermos refresh à página
+    removeGameFromListInMemory(listId: string, gameId: string) {
+      const list = this.user?.lists.find((l: any) => l.id === listId);
+      if (list) {
+        list.gamesIds = list.gamesIds.filter((id: string) => id !== gameId);
+      }
+    }*/
 
   editProfile(){
     this.router.navigate(['user-profile', this.user?.id, 'update-user']);
