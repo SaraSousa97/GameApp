@@ -1,30 +1,35 @@
-<h1>User Profile</h1>
+<h1 class="text-center mt-5">User Profile</h1>
 
 <!--mostrar e possibilidade de editar-->
-<div>    
-    <form action="form" class="form-group">
-        <h3 class="form-control">{{user?.name}}</h3>        
-        <p class="form-control">{{user?.email}}</p> 
-        <img [src]="user?.avatar" class="avatar" alt="avatar"/>
+<div class="container mt-4">    
+    <form action="form" class="form-group bg-light p-4 rounded shadow-sm">
         
+        <div class="text-center mb-4">
+            <img [src]="user?.avatar"  class="avatar img-fluid rounded-circle mb-3" alt="avatar"/>
+            <h3>{{user?.name}}</h3>    
+            <p class="text-muted">{{user?.email}}</p> 
+        </div>
 
         <!-- Mostrar listas do usuário e os gamesIds com thumbnails -->
-        <div *ngIf="(user?.lists ?? []).length > 0" class="lists-section">
-            <h2>User Lists</h2>
-            <div *ngFor="let list of user?.lists" class="list-item">
+        <div *ngIf="(user?.lists ?? []).length > 0" class="lists-section mt-4">
+            <h2 class="text-center mb-4">User Lists</h2>
+            <div *ngFor="let list of user?.lists" class="list-item mb-4">
             <h4>{{ list.name }}</h4>
-            <ul>
-                <li *ngFor="let gameId of list.gamesIds">
+            <ul class="list-group">
+                <li *ngFor="let gameId of list.gamesIds" class="list-group-item d-flex justify-content-between align-items-center">
                 <!--<img [src]="getThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail" />-->
                 Game ID: {{ gameId }}
-                <button type="button" (click)="removeGame(list.id, gameId)" class="btn btn-primary">Remove</button>
+                <button type="button" (click)="removeGame(list.id, gameId)" class="btn btn-danger btn-sm">Remove</button>
                 <!--<button type="button" (click)="removeGameFromListInMemory(list.id, gameId)" class="btn btn-primary">Remove</button>-->
                 </li>
             </ul>
             </div>
         </div>
 
-        <button type="button"  (click)="editProfile()" class="btn btn-primary" >Edit Profile</button>
+        <!-- Botão de editar perfil -->
+        <div class="text-center mt-4">
+            <button type="button"  (click)="editProfile()" class="btn btn-primary" >Edit Profile</button>
+        </div>
     </form>
 </div>
 
