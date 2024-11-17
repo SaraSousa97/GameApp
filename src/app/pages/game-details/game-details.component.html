@@ -14,6 +14,13 @@
           Release Date: <strong>{{ gameInfo?.releaseDate }}</strong>
         </p>
         <a         href="{{ gameInfo?.freetogameProfileUrl }}"         class="btn btn-primary"      >         Play Now       </a>
+
+        <div class="lists">
+          <button type="button" class="btn btn-primary" (click)="movingGame('emif', gameInfo?.id)">Play Later</button>
+          <button type="button" class="btn btn-primary" (click)="movingGame('qepb', gameInfo?.id)">Currently Playing</button>
+          <button type="button" class="btn btn-primary" (click)="movingGame('9ou3', gameInfo?.id)">Played</button>
+          <button type="button" class="btn btn-primary" (click)="movingGame('gypq', gameInfo?.id)">Completed</button>
+        </div>
       
       </div>
     </div>

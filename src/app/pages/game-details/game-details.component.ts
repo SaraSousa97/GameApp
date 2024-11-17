@@ -3,6 +3,9 @@ import { GameInfo, ListScreenshots } from '../../models/game-info';
 import { ListsService } from '../../services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-game-details',
   standalone: true,
@@ -13,10 +16,10 @@ import { CommonModule } from '@angular/common';
 export class GameDetailsComponent {
 
   gameInfo: GameInfo | undefined;
+  user: User |undefined;
 
 
-  constructor(private route: ActivatedRoute, private listsService:ListsService, private router: Router){}
-
+  constructor(private route: ActivatedRoute, private listsService:ListsService, private router: Router, private userServices: UserService){}
 
  
   ngOnInit() {
@@ -35,6 +38,24 @@ export class GameDetailsComponent {
    // TrackBy function for performance optimization
    trackByScreenshotId(index: number, screenshot: ListScreenshots): string {
     return screenshot.id;
+  }
+
+  loadUserProfile() {
+    this.userServices.getUser().subscribe(profile => {
+      this.user = profile;
+    });
+  }
+
+  movingGame(listId: string, gameId?: string){
+    if (!gameId) {
+      console.error('Game ID is undefined');
+      return;
+    }
+  
+    this.userServices.moveGame(listId, gameId).subscribe({
+      next: () => this.loadUserProfile(),
+      error: (error) => console.error('Erro ao adicionar jogo:', error)
+    });
   }
 
 }
