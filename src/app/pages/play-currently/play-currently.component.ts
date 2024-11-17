@@ -55,7 +55,6 @@ export class PlayCurrentlyComponent implements OnInit {
   }
 
   removeGame(listId: string, gameId: string){
-    //remover o jogo da lista
     this.userService.deleteGame(listId, gameId).subscribe({
       next: () => {
         this.loadUserProfile();

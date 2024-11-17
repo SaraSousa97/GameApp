@@ -12,8 +12,7 @@ export class NotificationsService {
 
   showNotification(message: string) {
     this.notificationSubject.next(message);
-    // Clear the notification after a timeout (optional)
-    setTimeout(() => this.clearNotification(), 2000); // 3 seconds
+    setTimeout(() => this.clearNotification(), 2000);
   }
 
   clearNotification() {

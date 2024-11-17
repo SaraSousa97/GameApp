@@ -82,16 +82,13 @@ export class UserService {
         const toList = profile.lists.find(list => list.id === toListId);
   
         if (fromList && toList) {
-          // Remove the game from the source list
           fromList.gamesIds = fromList.gamesIds.filter(id => id !== gameId);
   
-          // Add the game to the destination list if it's not already there
           if (!toList.gamesIds.includes(gameId)) {
             toList.gamesIds.push(gameId);
           }
         }
   
-        // Update the user profile
         return this.http.put<User>('http://localhost:3000/profile', profile);
       })
     );
