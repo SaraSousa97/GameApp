@@ -86,12 +86,8 @@ export class GameDetailsComponent {
       });
     } else {
       this.userServices.addGameToList(targetListId, gameId).subscribe({
-        next: () => {
-<<<<<<< HEAD
-          // After adding the game, refresh the lists and update the status
-=======
+        next: () => {                   
           this.checkGameInLists(gameId);
->>>>>>> cca1e63f8db6603995cff47e9b6dd9d1a7475567
           this.snackBar.open('Game added successfully!', 'Close', {
             duration: 3000,
             panelClass: ['snack-bar-success'],
