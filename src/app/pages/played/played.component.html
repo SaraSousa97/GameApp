@@ -1,1 +1,25 @@
-<p>played works!</p>
+<div class="container mt-4">
+    <h2>Played Games</h2>
+  
+    <!-- List of Played Games -->
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let game of playedGames">
+        <div class="card">
+          <img [src]="game.thumbnail" class="card-img-top" alt="Game Thumbnail" />
+          <div class="card-body">
+            <h5 class="card-title">{{ game.title }}</h5>
+            <p class="card-text">{{ game.shortDescription }}</p>
+            <button
+              class="btn btn-danger"
+              (click)="deleteGameFromPlayed(game.id)"
+            >
+              Remove from Played
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+  
