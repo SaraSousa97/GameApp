@@ -1,51 +1,94 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <!-- Brand -->
-      <a class="navbar-brand" href="#">
-        <img src="/logo.png" alt="GameHorizon Logo" style="width: auto; height: 100px;">
-      </a>
-  
-      <!-- Toggler for Mobile -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Navbar Links -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/">
+      <img src="/logo.png" alt="GameHorizon Logo" style="width: auto; height: 100px;">
+    </a>
+
+    <!-- Toggler for Mobile -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <!-- Home Link -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+
+        <!-- Dropdown Menu for My Lists -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="myListsDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            My Lists
+          </a>
+          <!--- Update this paths-->
+          <ul class="dropdown-menu" aria-labelledby="myListsDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/list/toplay" routerLinkActive="active">To Play</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/list/playing" routerLinkActive="active">Currently Playing</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/list/played" routerLinkActive="active">Played</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/list/completed" routerLinkActive="active">Completed</a>
+            </li>
+          </ul>
+        </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a> 
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/games" routerLinkActive="active">Games</a>
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Games</a>
           </li>
         </ul>
   
-        <div class="autocomplete-container">
+        <div class="autocomplete-container position-relative">
           <input
             type="text"
             [(ngModel)]="searchQuery"
             (input)="onSearch()"
             class="form-control"
-            placeholder="Search for a game..."
+            placeholder="Search for a game"
           />
-          <ul *ngIf="filteredGames?.length" class="autocomplete-list">
-            <li *ngFor="let game of filteredGames" (click)="onSelect(game)">
-              {{ game.title }}
-            </li>
-          </ul>
+        
+          <!-- Styled Search Results -->
+          <div *ngIf="filteredGames?.length" class="autocomplete-list position-absolute shadow bg-white w-100">
+            <div 
+              *ngFor="let game of filteredGames" 
+              (click)="onSelect(game)" 
+              class="autocomplete-item d-flex align-items-center p-2 border-bottom">
+              
+              <!-- Game Thumbnail -->
+              <img 
+                [src]="game.thumbnail || 'default-thumbnail.png'" 
+                alt="{{ game.title }}" 
+                class="me-3 rounded" 
+                style="width: 50px; height: 50px; object-fit: cover;">
+        
+              <!-- Game Title -->
+              <div class="text-truncate">
+                <h6 class="mb-0 text-primary">{{ game.title }}</h6>
+              </div>
+            </div>
+          </div>
         </div>
+        
         
   
         <!-- User Profile -->

@@ -11,7 +11,7 @@ import { ListsService } from '../services/lists.service';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule,RouterModule]
 })
 export class NavbarComponent {
   @Input() user: User | undefined;
