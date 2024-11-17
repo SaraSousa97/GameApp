@@ -3,7 +3,7 @@ import { List, User } from '../models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { GameInfo } from '../models/game-info';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,13 @@ export class UserService {
   getLists(): Observable<List[]>{
     return this.http.get<List[]>('http://localhost:3000/profile/:lists');
   }
+
+  getList(id: string): Observable<List | undefined> {
+    return this.http.get<User>('http://localhost:3000/profile').pipe(
+      map(profile => profile.lists.find(list => list.id === id))
+    );
+  }
+  
 
   updateUser(user: User): Observable<User> {
     return this.http.put<User>('http://localhost:3000/profile/', user);
