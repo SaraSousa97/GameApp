@@ -89,7 +89,7 @@ export class GameDetailsComponent {
       });
     } else {
       // If the game is not in any list yet, directly add it to the target list
-      this.userServices.moveGameBetweenLists('', targetListId, gameId).subscribe({
+      this.userServices.addGameToList(targetListId, gameId).subscribe({
         next: () => {
           // After adding the game, refresh the lists and update the status
           this.checkGameInLists(gameId);

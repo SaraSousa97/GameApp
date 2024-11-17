@@ -96,6 +96,20 @@ export class UserService {
       })
     );
   }
+
+  addGameToList(targetListId: string, gameId: string): Observable<User> {
+    return this.getUser().pipe(
+      switchMap((profile: User) => {
+        const toList = profile.lists.find(list => list.id === targetListId);
+        if (toList && !toList.gamesIds.includes(gameId)) {
+          toList.gamesIds.push(gameId);
+        }
+  
+        // Update the user profile
+        return this.http.put<User>('http://localhost:3000/profile', profile);
+      })
+    );
+  }
   
   
 }
