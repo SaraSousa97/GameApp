@@ -14,3 +14,14 @@
     margin-top: 10px;
   }
   
+  /* For success messages */
+.snackbar-success {
+  background-color: #4caf50; /* Green for success */
+  color: white;
+}
+
+/* For error messages */
+.snackbar-error {
+  background-color: #f44336; /* Red for error */
+  color: white;
+}

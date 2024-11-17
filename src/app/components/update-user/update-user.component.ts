@@ -5,32 +5,31 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-update-user',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './update-user.component.html',
-  styleUrl: './update-user.component.scss'
+  styleUrls: ['./update-user.component.scss']
 })
 export class UpdateUserComponent implements OnInit {
-  user: any |undefined;
+  user: any | undefined;
 
-  Form: FormGroup =new FormGroup(
-    {
+  Form: FormGroup = new FormGroup({
     id: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     avatar: new FormControl('')
-
-});
+  });
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +37,9 @@ export class UpdateUserComponent implements OnInit {
     if (userId) {
       this.userService.getUser().subscribe({
         next: (data) => {
-          console.log('User data:', data); // Debugging: Check the data structure
+          console.log('User data:', data);
           this.user = data;
-  
+
           // Use patchValue to update the form with matching fields
           this.Form.patchValue({
             id: data.id,
@@ -51,30 +50,43 @@ export class UpdateUserComponent implements OnInit {
           });
         },
         error: (error) => {
-          console.error('Erro ao carregar o usuário', error);
+          console.error('Error loading user', error);
         }
       });
     }
   }
-  
 
   saveProfile(): void {
     if (!this.Form.invalid) {
-      console.log(this.Form.getRawValue())
+      console.log(this.Form.getRawValue());
       this.userService.updateUser(this.Form.getRawValue()).subscribe({
-        next: data =>{
+        next: (data) => {
           console.log(data);
+          // Success: Show a success message using MatSnackBar
+          this.snackBar.open('Profile updated successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-success']
+          });
+
+          // Navigate to the user's profile after a successful update
           this.router.navigate(['/user-profile', this.user?.id]);
-
-        }, error: error =>{
-          console.log('Algo deu errado:', error);
         },
-        complete:()=>{
-
+        error: (error) => {
+          console.log('Error updating profile:', error);
+          // Error: Show an error message using MatSnackBar
+          this.snackBar.open('Failed to update profile. Please try again.', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-error']
+          });
         }
-      })
+      });
+    } else {
+      // If form is invalid, show an error message
+      this.snackBar.open('Please fill out all required fields correctly.', 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
     }
-    
   }
 
   removeAvatar(): void {
