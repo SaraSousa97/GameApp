@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Editar Perfil</h2>
+  <h2>Edit Profile</h2>
 
    <!-- Notification -->
    <div *ngIf="notification" class="notification">
@@ -76,14 +76,14 @@
     </div>
 
     <div class="form-group mt-3">
-      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      <button type="submit" class="btn btn-primary">Save alterations</button>
       <button
         type="button"
         (click)="removeAvatar()"
         class="btn btn-danger"
         *ngIf="Form.get('avatar')?.value"
       >
-        Remover Foto
+        Remove avatar
       </button>
     </div>
   </form>

@@ -5,6 +5,7 @@ import { GameService } from '../../services/game.service';
 import { List, User } from '../../models/user';
 import { GameInfo } from '../../models/game-info';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-play-currently',
@@ -17,7 +18,7 @@ export class PlayCurrentlyComponent implements OnInit {
   list: List | undefined;
   gameCache: { [gameId: string]: GameInfo } = {};
 
-  constructor(private userService: UserService, private gameService: GameService) {}
+  constructor(private userService: UserService, private gameService: GameService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.userService.getLists().subscribe({
