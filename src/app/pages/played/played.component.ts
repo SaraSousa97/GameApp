@@ -43,6 +43,7 @@ export class PlayedComponent {
   }
 
   getGameName(gameId: string): string {
+
     return this.gameCache[gameId]?.title || 'Unknown Game';
   }
 }

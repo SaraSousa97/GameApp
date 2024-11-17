@@ -12,6 +12,6 @@ export class GameService {
 
   // Método para obter informações do jogo pelo ID
   getGameById(gameId: string): Observable<GameInfo> {
-    return this.http.get<GameInfo>(`http://localhost:3000/gamesDetails/${gameId}`);
+    return this.http.get<GameInfo>(`http://localhost:3000/gameDetails/${gameId}`);
   }
 }
