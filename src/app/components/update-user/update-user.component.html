@@ -1,5 +1,10 @@
 <div class="container">
   <h2>Editar Perfil</h2>
+
+   <!-- Notification -->
+   <div *ngIf="notification" class="notification">
+    {{ notification }}
+  </div>
   
   <!-- Formulário de edição -->
   <form [formGroup]="Form" (ngSubmit)="saveProfile()">

@@ -13,15 +13,16 @@
   button {
     margin-top: 10px;
   }
-  
-  /* For success messages */
-.snackbar-success {
-  background-color: #4caf50; /* Green for success */
-  color: white;
-}
 
-/* For error messages */
-.snackbar-error {
-  background-color: #f44336; /* Red for error */
-  color: white;
-}
+
+  .notification {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
