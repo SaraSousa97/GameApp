@@ -1,56 +1,48 @@
-import { Component } from '@angular/core';
-import { Game } from '../../models/game';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { ListsService } from '../../services/lists.service';
+import { GameService } from '../../services/game.service';
+import { List, User } from '../../models/user';
+import { GameInfo } from '../../models/game-info';
 import { CommonModule } from '@angular/common';
-import { Observable, forkJoin } from 'rxjs';
-import { List } from '../../models/user';
 
 @Component({
   selector: 'app-played',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './played.component.html',
-  styleUrls: ['./played.component.scss'], // Fixed plural typo in styleUrls
+  styleUrls: ['./played.component.scss'],
 })
 export class PlayedComponent {
-  playedGames: Game[] | undefined = [];
-  allGames: Game[] |undefined = [];
-  playedListId: string = '9ou3'; // Directly set the "Played" list ID
+  list: List | undefined;
+  gameCache: { [gameId: string]: GameInfo } = {};
 
-  constructor(private userService: UserService, private listService: ListsService) {}
+  constructor(private userService: UserService, private gameService: GameService) {}
 
-  ngOnInit(): void {
-    this.fetchPlayedGames();
-    this.fetchAllGames();
-  }
-
-  fetchPlayedGames(): void {
-    this.userService.getList(this.playedListId).subscribe(list => {
-      if (list) {
-        const gameRequests = list.gamesIds.map(id => this.userService.getGameInfo(id));
-        forkJoin(gameRequests).subscribe(games => {
-          this.playedGames = games; // Set fetched games
-        });
-      }
+  ngOnInit() {
+    this.userService.getLists().subscribe({
+      next: (lists: any[]) => {
+        this.list = lists.find((list: { name: string; }) => list.name === 'Played');
+        this.preloadGameInfo();
+      },
+      error: (error: any) => console.error('Erro ao carregar lista:', error)
     });
   }
 
-  fetchAllGames(): void {
-    this.listService.getGamesList().subscribe(games => {
-      this.allGames = games;
+  preloadGameInfo() {
+    const gameIds = this.list?.gamesIds || [];
+    gameIds.forEach(gameId => {
+      this.gameService.getGameById(gameId).subscribe(game => {
+        this.gameCache[gameId] = game;
+      });
     });
   }
 
-  addGameToPlayed(gameId: string): void {
-    this.userService.moveGame(this.playedListId, gameId).subscribe(() => {
-      this.fetchPlayedGames(); // Refresh the played games list
-    });
+  getGameThumbnail(gameId: string): string | undefined {
+    return this.gameCache[gameId]?.thumbnail;
   }
 
-  deleteGameFromPlayed(gameId: string): void {
-    this.userService.deleteGame(this.playedListId, gameId).subscribe(() => {
-      this.fetchPlayedGames(); // Refresh the played games list
-    });
+  getGameName(gameId: string): string {
+    return this.gameCache[gameId]?.title || 'Unknown Game';
   }
 }

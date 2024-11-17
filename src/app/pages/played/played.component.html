@@ -1,25 +1,14 @@
-<div class="container mt-4">
-    <h2>Played Games</h2>
-  
-    <!-- List of Played Games -->
-    <div class="row">
-      <div class="col-md-4 mb-3" *ngFor="let game of playedGames">
-        <div class="card">
-          <img [src]="game.thumbnail" class="card-img-top" alt="Game Thumbnail" />
-          <div class="card-body">
-            <h5 class="card-title">{{ game.title }}</h5>
-            <p class="card-text">{{ game.shortDescription }}</p>
-            <button
-              class="btn btn-danger"
-              (click)="deleteGameFromPlayed(game.id)"
-            >
-              Remove from Played
-            </button>
-          </div>
-        </div>
+<div *ngIf="list" class="container mt-5">
+  <h2>{{ list.name }}</h2>
+  <ul class="list-group mt-3">
+    <li *ngFor="let gameId of list.gamesIds" class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img [src]="getGameThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail me-3" />
+        {{ getGameName(gameId) }}
+        <p> Game Id:{{ gameId}}</p>
       </div>
-    </div>
-
+      <button type="button" class="btn btn-danger btn-sm">Remove</button>
+    </li>
+  </ul>
 </div>
-
   
