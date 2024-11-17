@@ -20,7 +20,7 @@ export class GameDetailsComponent {
   gameInfo: GameInfo | undefined;
   user: User | undefined;
 
-  listsStatus: { [key: string]: boolean } = {}; // Stores whether the game is in each list
+  listsStatus: { [key: string]: boolean } = {};
   listNames: { [key: string]: string } = {
     emif: 'Play Later',
     qepb: 'Currently Playing',
@@ -49,12 +49,10 @@ export class GameDetailsComponent {
     });
   }
 
-  // TrackBy function for performance optimization
   trackByScreenshotId(index: number, screenshot: ListScreenshots): string {
     return screenshot.id;
   }
 
-  // Add this helper function in your GameDetailsComponent class
   getListKeys(): string[] {
     return Object.keys(this.listNames);
   }
@@ -71,14 +69,11 @@ export class GameDetailsComponent {
       return;
     }
 
-    // Find the current list where the game is located
     const currentListId = this.getCurrentList(gameId);
 
     if (currentListId) {
-      // Move the game between lists (remove from current and add to target)
       this.userServices.moveGameBetweenLists(currentListId, targetListId, gameId).subscribe({
         next: () => {
-          // After moving the game, refresh the lists and update the status
           this.checkGameInLists(gameId);
           this.snackBar.open('Game moved successfully!', 'Close', {
             duration: 3000,
@@ -90,10 +85,13 @@ export class GameDetailsComponent {
         error: (error) => console.error('Error moving game:', error)
       });
     } else {
-      // If the game is not in any list yet, directly add it to the target list
       this.userServices.addGameToList(targetListId, gameId).subscribe({
         next: () => {
+<<<<<<< HEAD
           // After adding the game, refresh the lists and update the status
+=======
+          this.checkGameInLists(gameId);
+>>>>>>> cca1e63f8db6603995cff47e9b6dd9d1a7475567
           this.snackBar.open('Game added successfully!', 'Close', {
             duration: 3000,
             panelClass: ['snack-bar-success'],
@@ -109,21 +107,19 @@ export class GameDetailsComponent {
   }
 
   getCurrentList(gameId: string): string | null {
-    // Find the current list where the game is located
     for (let listId in this.listsStatus) {
       if (this.listsStatus[listId] && this.listsStatus.hasOwnProperty(listId)) {
-        return listId; // Return the first list where the game is found
+        return listId;
       }
     }
-    return null; // Game is not in any list
+    return null;
   }
 
   checkGameInLists(gameId: string) {
-    const listIds = Object.keys(this.listNames); // List IDs to check
+    const listIds = Object.keys(this.listNames);
 
     const statusObservables = listIds.map(listId =>
       this.userServices.isGameInList(listId, gameId).pipe(
-        // Map the result to a status object
         map(isInList => ({ listId, isInList }))
       )
     );

@@ -1,21 +1,15 @@
 <div class="container mt-4">
     <div class="row">
-      <!-- Loop through games and display each game in a card -->
       <div class="col-md-4 col-sm-6 mb-4" *ngFor="let game of games">
         <div class="card shadow-sm">
           <a [routerLink]="'/game-details/' + game.id">
-            <!-- Game Thumbnail Image -->
             <img [src]="game.thumbnail" class="card-img-top img-fluid" alt="Game Thumbnail">
           </a>
           <div class="card-body">
-            <!-- Game Title -->
             <h5 class="card-title">{{ game.title }}</h5>
-            <!-- Game Description (sliced) -->
             <p class="card-text text-muted">{{ game.shortDescription }}</p>
-            <!-- Release Date -->
             <p class="text-muted"><small>{{ game.releaseDate | date: 'shortDate' }}</small></p>
           </div>
-          <!-- View Details Button -->
           <div class="card-footer">
             <a [routerLink]="'/game-details/' + game.id" class="btn btn-primary btn-sm w-100">View Details</a>
           </div>

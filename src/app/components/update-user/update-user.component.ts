@@ -42,7 +42,6 @@ export class UpdateUserComponent implements OnInit {
           
           this.user = data;
 
-          // Use patchValue to update the form with matching fields
           this.Form.patchValue({
             id: data.id,
             name: data.name,
@@ -64,7 +63,6 @@ export class UpdateUserComponent implements OnInit {
         next: (data) => {
           this.notificationsService.showNotification('Profile updated sucessfully!');
 
-          // Navigate to the user's profile after a successful update
           this.router.navigate(['/user-profile', this.user?.id]);
         },
         error: (error) => {
@@ -76,10 +74,9 @@ export class UpdateUserComponent implements OnInit {
   }
 
   removeAvatar(): void {
-    this.Form.patchValue({ avatar: '' }); // Clear the avatar field in the form
+    this.Form.patchValue({ avatar: '' });
 
     if (this.user) {
-      // Optionally, update the user profile to reflect the removal of the avatar
       this.userService.updateUser(this.Form.getRawValue()).subscribe({
         next: () => {
           this.notificationsService.showNotification('Avatar removed successfully!');
