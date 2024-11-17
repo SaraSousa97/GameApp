@@ -1,5 +1,15 @@
 <h1 class="text-center mt-5">User Profile</h1>
 
+<div class="container mt-5">
+    <nav class="nav justify-content-center mb-4">
+      <a routerLink="/play-later" class="btn btn-primary me-2">Play Later</a>
+      <a routerLink="/play-currently" class="btn btn-primary me-2">Currently Playing</a>
+      <a routerLink="/played" class="btn btn-primary me-2">Played</a>
+      <a routerLink="/completed" class="btn btn-primary">Completed</a>
+    </nav>
+  </div>
+  <router-outlet></router-outlet>
+
 <!--mostrar e possibilidade de editar-->
 <div class="container mt-4">    
     <form action="form" class="form-group bg-light p-4 rounded shadow-sm">
@@ -11,20 +21,20 @@
         </div>
 
         <!-- Mostrar listas do usuário e os gamesIds com thumbnails -->
-        <div *ngIf="(user?.lists ?? []).length > 0" class="lists-section mt-4">
+        <!--<div *ngIf="(user?.lists ?? []).length > 0" class="lists-section mt-4">
             <h2 class="text-center mb-4">User Lists</h2>
             <div *ngFor="let list of user?.lists" class="list-item mb-4">
             <h4>{{ list.name }}</h4>
             <ul class="list-group">
                 <li *ngFor="let gameId of list.gamesIds" class="list-group-item d-flex justify-content-between align-items-center">
-                <!--<img [src]="getThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail" />-->
+                <img [src]="getThumbnail(gameId)" alt="Game Thumbnail" class="game-thumbnail" />
                 Game ID: {{ gameId }}
                 <button type="button" (click)="removeGame(list.id, gameId)" class="btn btn-danger btn-sm">Remove</button>
-                <!--<button type="button" (click)="removeGameFromListInMemory(list.id, gameId)" class="btn btn-primary">Remove</button>-->
+                <button type="button" (click)="removeGameFromListInMemory(list.id, gameId)" class="btn btn-primary">Remove</button>
                 </li>
             </ul>
             </div>
-        </div>
+        </div>-->
 
         <!-- Botão de editar perfil -->
         <div class="text-center mt-4">

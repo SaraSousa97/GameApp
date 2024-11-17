@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ListsService } from '../../services/lists.service';
 import { GameService } from '../../services/game.service';
@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterOutlet],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
@@ -32,8 +32,6 @@ export class UserProfileComponent {
       next: (data) => {
         console.log(data);
         this.user = data;
-        //this.loadGameThumbnails();
-        //this.takeGameIds();
       },
       error: (error) => {
         console.log('Something went wrong: ', error);
@@ -46,32 +44,6 @@ export class UserProfileComponent {
   getGameIds(): string[] {
     return this.user?.lists?.flatMap(list => list.gamesIds) || [];
   }
-/*
-  // Método para carregar as thumbnails para todos os gameIds
-  loadGameThumbnails() {
-    this.user?.lists.forEach(list => {
-      list.gamesIds.forEach(gameId => {
-        this.gameService.getGameById(gameId).subscribe({
-          next: (game) => {
-            this.gameThumbnails[gameId] = game.thumbnail;
-          },
-          error: (error) => console.error('Error loading', error)
-        });
-      });
-    });
-  }
-
-  getThumbnail(gameId: string): string {
-    return this.gameThumbnails[gameId];
-  }
-
-  takeGameIds(){
-    if (this.user?.lists) {
-      this.gameIds = this.user.lists.flatMap((list: List) => list.gamesIds);
-      console.log('Games IDs:', this.gameIds);
-    }
-  }
-*/
 
   loadUserProfile() {
     this.userService.getUser().subscribe(profile => {
