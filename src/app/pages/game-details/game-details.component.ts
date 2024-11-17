@@ -38,7 +38,6 @@ export class GameDetailsComponent {
     const id = this.route.snapshot.paramMap.get('id') || '1';
     this.listsService.getGamesInfo(id).subscribe({
       next: (data) => {
-        console.log(data);
         this.gameInfo = data;
         this.checkGameInLists(data.id);
       },
@@ -58,23 +57,50 @@ export class GameDetailsComponent {
     return Object.keys(this.listNames);
   }
 
-
   loadUserProfile() {
     this.userServices.getUser().subscribe(profile => {
       this.user = profile;
     });
   }
 
-  movingGame(listId: string, gameId?: string) {
+  movingGame(targetListId: string, gameId?: string) {
     if (!gameId) {
       console.error('Game ID is undefined');
       return;
     }
 
-    this.userServices.moveGame(listId, gameId).subscribe({
-      next: () => this.loadUserProfile(),
-      error: (error) => console.error('Error adding game:', error)
-    });
+    // Find the current list where the game is located
+    const currentListId = this.getCurrentList(gameId);
+
+    if (currentListId) {
+      // Move the game between lists (remove from current and add to target)
+      this.userServices.moveGameBetweenLists(currentListId, targetListId, gameId).subscribe({
+        next: () => {
+          // After moving the game, refresh the lists and update the status
+          this.checkGameInLists(gameId);
+        },
+        error: (error) => console.error('Error moving game:', error)
+      });
+    } else {
+      // If the game is not in any list yet, directly add it to the target list
+      this.userServices.moveGameBetweenLists('', targetListId, gameId).subscribe({
+        next: () => {
+          // After adding the game, refresh the lists and update the status
+          this.checkGameInLists(gameId);
+        },
+        error: (error) => console.error('Error adding game:', error)
+      });
+    }
+  }
+
+  getCurrentList(gameId: string): string | null {
+    // Find the current list where the game is located
+    for (let listId in this.listsStatus) {
+      if (this.listsStatus[listId] && this.listsStatus.hasOwnProperty(listId)) {
+        return listId; // Return the first list where the game is found
+      }
+    }
+    return null; // Game is not in any list
   }
 
   checkGameInLists(gameId: string) {

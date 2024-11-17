@@ -16,16 +16,14 @@
       <a href="{{ gameInfo?.freetogameProfileUrl }}" class="btn btn-secondary">Play Now</a>
 
       <div class="lists">
-        <h3>Lists</h3>
         <ul class="list-group mb-3">
           <li *ngFor="let listId of getListKeys()" class="list-group-item">
-            <strong>{{ listNames[listId] }}:</strong>
-            <span *ngIf="listsStatus[listId]; else notInList">In List</span>
-            <ng-template #notInList>Not in List</ng-template>
+            <span *ngIf="listsStatus[listId]; else notInList">This game is on your list <strong>{{ listNames[listId] }}</strong></span>
+            <ng-template #notInList></ng-template>
           </li>
         </ul>
         
-
+        <h3>Click on the list you want to add the game to:</h3>
         <button type="button" class="btn btn-primary" (click)="movingGame('emif', gameInfo?.id)">Play Later</button>
         <button type="button" class="btn btn-primary" (click)="movingGame('qepb', gameInfo?.id)">Currently Playing</button>
         <button type="button" class="btn btn-primary" (click)="movingGame('9ou3', gameInfo?.id)">Played</button>

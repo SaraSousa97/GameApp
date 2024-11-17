@@ -30,7 +30,6 @@ export class UserProfileComponent {
   ngOnInit() {
     this.userService.getUser().subscribe({
       next: (data) => {
-        console.log(data);
         this.user = data;
       },
       error: (error) => {

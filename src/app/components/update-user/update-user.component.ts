@@ -39,7 +39,7 @@ export class UpdateUserComponent implements OnInit {
     if (userId) {
       this.userService.getUser().subscribe({
         next: (data) => {
-          console.log('User data:', data);
+          
           this.user = data;
 
           // Use patchValue to update the form with matching fields
@@ -60,10 +60,8 @@ export class UpdateUserComponent implements OnInit {
 
   saveProfile(): void {
     if (!this.Form.invalid) {
-      console.log(this.Form.getRawValue());
       this.userService.updateUser(this.Form.getRawValue()).subscribe({
         next: (data) => {
-          console.log('Profile updated successfully:', data);
           this.notificationsService.showNotification('Profile updated sucessfully!');
 
           // Navigate to the user's profile after a successful update
@@ -84,7 +82,6 @@ export class UpdateUserComponent implements OnInit {
       // Optionally, update the user profile to reflect the removal of the avatar
       this.userService.updateUser(this.Form.getRawValue()).subscribe({
         next: () => {
-          console.log('Avatar removed successfully');
           this.notificationsService.showNotification('Avatar removed successfully!');
         },
         error: (error) => {

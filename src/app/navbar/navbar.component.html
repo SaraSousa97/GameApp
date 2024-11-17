@@ -28,31 +28,17 @@
 
         <!-- Dropdown Menu for My Lists -->
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            id="myListsDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" href="#" id="myListsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             My Lists
           </a>
-          <!--- Update this paths-->
-          <ul class="dropdown-menu" aria-labelledby="myListsDropdown">
-            <li>
-              <a class="dropdown-item" routerLink="/my-lists" routerLinkActive="active">To Play</a>
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="/list/playing" routerLinkActive="active">Currently Playing</a>
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="/list/played" routerLinkActive="active">Played</a>
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="/list/completed" routerLinkActive="active">Completed</a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="myListsDropdown">
+            <a class="dropdown-item" routerLink="/my-lists/play-later" routerLinkActive="active">Play Later</a>
+            <a class="dropdown-item" routerLink="/my-lists/played" routerLinkActive="active">Played</a>
+            <a class="dropdown-item" routerLink="/my-lists/play-currently" routerLinkActive="active">Currently Playing</a>
+            <a class="dropdown-item" routerLink="/my-lists/completed" routerLinkActive="active">Completed</a>
+          </div>
         </li>
+        
           <li class="nav-item">
             <a class="nav-link" routerLink="/home" routerLinkActive="active">Games</a>
           </li>
