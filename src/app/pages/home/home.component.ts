@@ -24,7 +24,6 @@ export class HomeComponent {
   ngOnInit() {
     this.listsService.getGamesList().subscribe({
       next: (data: Game[]) => {
-        console.log(data);
         this.games = data;
       },
       error: (error) => {

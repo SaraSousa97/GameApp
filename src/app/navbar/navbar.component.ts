@@ -42,7 +42,6 @@ export class NavbarComponent {
   }
 
   onSelect(game: Game) {
-    console.log('Selected game:', game);
     this.router.navigate(['/game-details', game.id]);
     this.searchQuery = game.title;
     this.filteredGames = [];
@@ -53,7 +52,6 @@ export class NavbarComponent {
 
     this.userService.getUser().subscribe({
       next: (data) => {
-        console.log(data);
         this.user = data;
       },
       error: (error) => {
@@ -65,7 +63,6 @@ export class NavbarComponent {
 
     this.listService.getGamesList().subscribe({
       next: (data: Game[]) => {
-        console.log(data);
         this.games = data;
       },
       error: (error) => {

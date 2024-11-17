@@ -38,7 +38,6 @@ export class GameDetailsComponent {
     const id = this.route.snapshot.paramMap.get('id') || '1';
     this.listsService.getGamesInfo(id).subscribe({
       next: (data) => {
-        console.log(data);
         this.gameInfo = data;
         this.checkGameInLists(data.id);
       },
